@@ -5,7 +5,6 @@
 *.iml
 
 /build/
-/gradle/
 /local.properties
 /gradlew
 /gradlew.bat
