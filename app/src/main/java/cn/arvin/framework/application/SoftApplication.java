@@ -4,6 +4,8 @@ package cn.arvin.framework.application;
 import java.net.CookieHandler;
 
 import cn.arvin.framework.constants.Config;
+import cn.arvin.framework.core.image.ImageLoader;
+import cn.arvin.framework.core.image.impl.ImageLoaderImpl;
 import cn.arvin.framework.exception.AppUncaughtExceptionHandler;
 
 
@@ -24,6 +26,10 @@ public class SoftApplication extends AbsApp {
 
         //Cookie管理
         CookieHandler.setDefault(new AppCookieManager(this));
+
+        //设置图片加载器
+        ImageLoader.setImageHandle(new ImageLoaderImpl());
+
     }
 
 
