@@ -15,8 +15,7 @@
         android:id="@+id/body_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/head_container"
-        android:orientation="vertical" />
+        android:layout_below="@+id/head_container"/>
 
     <FrameLayout
         android:id="@+id/body_overlay_container"

@@ -57,6 +57,7 @@ public abstract class FrameActivity extends BaseActivity implements View.OnClick
         } else {
             if (getHeadViewId() == INIT_HEADER) {
                 mHeadView = new HeaderBar(this);
+                mHeadContainer.addView(mHeadView);
             } else {
                 mHeadView = layoutInflater.inflate(getHeadViewId(), mHeadContainer, true);
             }
