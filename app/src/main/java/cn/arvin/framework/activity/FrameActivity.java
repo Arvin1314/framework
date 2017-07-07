@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public abstract class FrameActivity extends BaseActivity implements View.OnClick
         } else {
             if (getHeadViewId() == INIT_HEADER) {
                 mHeadView = new HeaderBar(this);
+                mHeadContainer.addView(mHeadView);
             } else {
                 mHeadView = layoutInflater.inflate(getHeadViewId(), mHeadContainer, true);
             }
@@ -138,7 +140,7 @@ public abstract class FrameActivity extends BaseActivity implements View.OnClick
 
     protected void setShadow(boolean show) {
         if (mShadow == null) {
-            if(!show){
+            if (!show) {
                 return;
             }
             mShadow = new ImageView(this);
@@ -146,12 +148,14 @@ public abstract class FrameActivity extends BaseActivity implements View.OnClick
         }
         mBodyContainer.removeView(mShadow);
 
-        if(mHeadView != null && mHeadView instanceof HeaderBar){
-            ((HeaderBar)mHeadView).setDividerVisible(!show);
+        if (mHeadView != null && mHeadView instanceof HeaderBar) {
+            ((HeaderBar) mHeadView).setDividerVisible(!show);
         }
 
         if (show) {
-            mBodyContainer.addView(mShadow);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            mBodyContainer.addView(mShadow, params);
         }
     }
 
