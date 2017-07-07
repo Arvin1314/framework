@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.lang.reflect.Type;
 
 import cn.arvin.framework.R;
-import cn.arvin.framework.core.RequestSender;
+import cn.arvin.framework.core.net.RequestSender;
 import cn.arvin.framework.core.net.RequestModel;
 import cn.arvin.framework.core.net.RequestParams;
 import cn.arvin.framework.core.net.callback.CommonCallback;

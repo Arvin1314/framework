@@ -29,7 +29,7 @@ import java.util.Map;
 
 import cn.arvin.framework.R;
 import cn.arvin.framework.application.SoftApplication;
-import cn.arvin.framework.core.RequestSender;
+import cn.arvin.framework.core.net.RequestSender;
 import cn.arvin.framework.core.net.NetworkHeader;
 import cn.arvin.framework.core.net.RequestModel;
 import cn.arvin.framework.core.net.RestUrlBuilder;

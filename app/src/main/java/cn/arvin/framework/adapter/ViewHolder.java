@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import cn.arvin.framework.core.ImageLoader;
+import cn.arvin.framework.core.image.ImageLoader;
 
 
 /**

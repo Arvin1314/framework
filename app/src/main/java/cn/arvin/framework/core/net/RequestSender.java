@@ -1,10 +1,8 @@
-package cn.arvin.framework.core;
+package cn.arvin.framework.core.net;
 
 
 import java.lang.reflect.Type;
 
-import cn.arvin.framework.core.net.RequestModel;
-import cn.arvin.framework.core.net.RequestParams;
 import cn.arvin.framework.core.net.base.CommonNetwork;
 import cn.arvin.framework.core.net.callback.CommonCallback;
 import cn.arvin.framework.core.net.impl.DefaultNetwork;
