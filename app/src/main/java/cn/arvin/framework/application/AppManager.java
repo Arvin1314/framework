@@ -71,7 +71,7 @@ public class AppManager {
 
         //取消对应界面的网络请求
         final String tag = activity.getClass().getSimpleName();
-        mRequestQueue.cancelAll(new RequestQueue.RequestFilter() {
+        getRequestQueue().cancelAll(new RequestQueue.RequestFilter() {
             @Override
             public boolean apply(Request<?> request) {
                 return tag.equals(request.getTag());
