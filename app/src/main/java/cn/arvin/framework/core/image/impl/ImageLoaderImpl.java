@@ -17,7 +17,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.core.image.base.ImageHandle;
 import cn.arvin.framework.core.image.base.ImageLoadingListener;
 
@@ -107,7 +107,7 @@ public class ImageLoaderImpl implements ImageHandle {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory());
         int cacheSize = maxMemory / 8;
 
-        ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(SoftApplication.get())
+        ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(FrameApplication.get())
                 .defaultDisplayImageOptions(options)
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .threadPoolSize(4)//线程池线程数量

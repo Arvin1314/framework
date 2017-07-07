@@ -9,18 +9,19 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.reflect.Type;
-
 import cn.arvin.framework.R;
-import cn.arvin.framework.core.net.RequestSender;
-import cn.arvin.framework.core.net.RequestModel;
-import cn.arvin.framework.core.net.RequestParams;
-import cn.arvin.framework.core.net.callback.CommonCallback;
+import cn.arvin.framework.widget.HeaderBar;
 
 
-public abstract class NormalActivity extends BaseActivity implements View.OnClickListener {
+public abstract class FrameActivity extends BaseActivity implements View.OnClickListener {
+
+    public static final int INIT_HEADER = -1;
+
+    public static final int NO_HEADER = 0;
+
     private View mBaseLayout;
     private FrameLayout mHeadContainer;
     private FrameLayout mBodyContainer;
@@ -28,6 +29,7 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
 
     protected View mHeadView;
     protected View mBodyView;
+    protected ImageView mShadow;
     private SparseArray<View> mBodyOverlayViews = new SparseArray<>();
 
     private long mLastShowTime;
@@ -50,15 +52,21 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
         mBodyContainer = getView(R.id.body_container);
         mBodyOverlayContainer = getView(R.id.body_overlay_container);
 
-        if (getHeadViewId() != 0) {
-            mHeadView = layoutInflater.inflate(getHeadViewId(), mHeadContainer, true);
+        if (getHeadViewId() == NO_HEADER) {
+            mHeadContainer.setVisibility(View.GONE);
+        } else {
+            if (getHeadViewId() == INIT_HEADER) {
+                mHeadView = new HeaderBar(this);
+            } else {
+                mHeadView = layoutInflater.inflate(getHeadViewId(), mHeadContainer, true);
+            }
 
             initHeadViews(mHeadView);
-        } else {
-            mHeadContainer.setVisibility(View.GONE);
         }
 
         mBodyView = layoutInflater.inflate(getBodyViewId(), mBodyContainer, true);
+
+        setShadow(getHeadViewId() != NO_HEADER);
 
         initBodyViews(mBodyView);
 
@@ -79,7 +87,17 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
      *
      * @return 标题栏部分要显示的内容布局文件的id
      */
-    public abstract int getHeadViewId();
+    protected int getHeadViewId() {
+        return INIT_HEADER;
+    }
+
+    /**
+     * 初始化头部View的方法
+     *
+     * @param head
+     */
+    protected void initHeadViews(View head) {
+    }
 
     /**
      * second step:获取界面主体部分要显示的内容布局文件的id
@@ -89,18 +107,9 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
     public abstract int getBodyViewId();
 
     /**
-     * 初始化头部View的方法
-     *
-     * @param head
-     */
-    protected abstract void initHeadViews(View head);
-
-
-    /**
      * 初始化标题栏下面主体的内容部分
      */
     public abstract void initBodyViews(View body);
-
 
     /**
      * 在实例化布局之后处理的逻辑，执行此方法时界面中的控件均已经实例化
@@ -124,6 +133,26 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         onClickEvent(view.getId(), view);
+    }
+
+
+    protected void setShadow(boolean show) {
+        if (mShadow == null) {
+            if(!show){
+                return;
+            }
+            mShadow = new ImageView(this);
+            mShadow.setImageResource(R.mipmap.header_shadow);
+        }
+        mBodyContainer.removeView(mShadow);
+
+        if(mHeadView != null && mHeadView instanceof HeaderBar){
+            ((HeaderBar)mHeadView).setDividerVisible(!show);
+        }
+
+        if (show) {
+            mBodyContainer.addView(mShadow);
+        }
     }
 
     /**
@@ -161,29 +190,6 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
     protected void dismissBodyOverlay() {
         mBodyOverlayContainer.removeAllViews();
         mBodyOverlayContainer.setVisibility(View.GONE);
-    }
-
-    /**
-     * 根据控件id将控件实例化，利用泛型，省略了findViewById时强制类型转换
-     *
-     * @param id
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    protected final <T extends View> T getView(int id) {
-        return (T) findViewById(id);
-    }
-
-    /**
-     * 根据控件id将控件实例化，利用泛型，省略了findViewById时强制类型转换
-     *
-     * @param parent
-     * @param id
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    protected final <T extends View> T getView(View parent, int id) {
-        return (T) parent.findViewById(id);
     }
 
 
@@ -255,86 +261,5 @@ public abstract class NormalActivity extends BaseActivity implements View.OnClic
             e.printStackTrace();
         }
     }
-
-
-    // --------------------------------------------------------------------------------
-
-    /**
-     * 发送get请求，返回字符串形式的请求结果
-     *
-     * @param url
-     * @param callback
-     */
-    public void stringGetRequest(String url, CommonCallback<String> callback) {
-        RequestModel requestModel = new RequestModel(url, RequestModel.Method.GET, callback);
-        requestModel.setTag(getTag());
-        RequestSender.sendRequest(requestModel);
-    }
-
-    /**
-     * 发送post请求，返回字符串形式的请求结果
-     *
-     * @param url
-     * @param params
-     * @param callback
-     */
-    public void stringPostRequest(String url, RequestParams params, CommonCallback<String> callback) {
-        RequestModel requestModel = new RequestModel(url, RequestModel.Method.POST, params, callback);
-        requestModel.setTag(getTag());
-        RequestSender.sendRequest(requestModel);
-    }
-
-    /**
-     * 发送get请求，返回指定类型对象形式的请求结果
-     *
-     * @param url
-     * @param clazz
-     * @param callback
-     */
-    public void objectGetRequest(String url, Class<?> clazz, CommonCallback<?> callback) {
-        objectGetRequest(url, null, clazz, callback);
-    }
-
-    /**
-     * 发送get请求，返回指定类型对象形式的请求结果
-     *
-     * @param url
-     * @param clazz
-     * @param callback
-     */
-    public void objectGetRequest(String url, RequestParams params, Class<?> clazz, CommonCallback<?> callback) {
-        RequestModel requestModel = new RequestModel(url, RequestModel.Method.GET, params, clazz, callback);
-        requestModel.setTag(getTag());
-        RequestSender.sendRequest(requestModel);
-    }
-
-    /**
-     * 发送post请求，返回指定类型对象形式的请求结果
-     *
-     * @param url
-     * @param params
-     * @param clazz
-     * @param callback
-     */
-    public void objectPostRequest(String url, RequestParams params, Class<?> clazz, CommonCallback<?> callback) {
-        RequestModel requestModel = new RequestModel(url, RequestModel.Method.POST, params, clazz, callback);
-        requestModel.setTag(getTag());
-        RequestSender.sendRequest(requestModel);
-    }
-
-
-    //----------------------------根据TypeToken解析--------------------------//
-    public void objectGetRequest(String url, Type jsonType, CommonCallback<?> callback) {
-        objectGetRequest(url, null, jsonType, callback);
-    }
-
-    public void objectGetRequest(String url, RequestParams params, Type jsonType, CommonCallback<?> callback) {
-        RequestModel requestModel = new RequestModel(url, RequestModel.Method.GET, params, jsonType, callback);
-        requestModel.setTag(getTag());
-        RequestSender.sendRequest(requestModel);
-    }
-
-
-
 
 }

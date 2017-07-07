@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!--基础背景颜色-->
+    <color name="bg_color_white">#FFFFFF</color>
+
+    <!--基础文字颜色-->
+    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_333333">#333333</color>
+    <color name="text_color_666666">#666666</color>
+    <color name="text_color_999999">#999999</color>
+
+    <!--分割线-->
+    <color name="body_divider">#EAEAEA</color>
+    <color name="title_divider">#DFDFDF</color>
 </resources>

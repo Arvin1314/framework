@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.constants.Config;
 
 
@@ -27,7 +27,7 @@ public class SPUtils {
      */
     public static final String FILE_NAME = Config.SP_NAME;
 
-    private static final SharedPreferences sSharedPreferences = SoftApplication.get().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    private static final SharedPreferences sSharedPreferences = FrameApplication.get().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
@@ -143,7 +143,7 @@ public class SPUtils {
      * @param key
      */
     public static void remove(String key) {
-        Context context = SoftApplication.get();
+        Context context = FrameApplication.get();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
@@ -154,7 +154,7 @@ public class SPUtils {
      * 清除所有数据
      */
     public static void clear() {
-        Context context = SoftApplication.get();
+        Context context = FrameApplication.get();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
@@ -168,7 +168,7 @@ public class SPUtils {
      * @return
      */
     public static boolean contains(String key) {
-        Context context = SoftApplication.get();
+        Context context = FrameApplication.get();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         return sp.contains(key);
     }
@@ -179,7 +179,7 @@ public class SPUtils {
      * @return
      */
     public static Map<String, ?> getAll() {
-        Context context = SoftApplication.get();
+        Context context = FrameApplication.get();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         return sp.getAll();
     }

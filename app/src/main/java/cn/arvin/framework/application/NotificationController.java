@@ -22,7 +22,7 @@ public class NotificationController {
 
     private NotificationController() {
         mMaxNotificationCount = 5;
-        mContext = SoftApplication.get();
+        mContext = FrameApplication.get();
         mNotificationTagList = new ArrayList<>();
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
     }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 
 
 /**
@@ -12,7 +12,7 @@ import cn.arvin.framework.application.SoftApplication;
  */
 
 public class ResourceUtil {
-    private static Context context = SoftApplication.get();
+    private static Context context = FrameApplication.get();
 
     /**
      * 获取字符串资源

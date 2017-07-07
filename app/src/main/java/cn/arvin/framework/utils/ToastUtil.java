@@ -5,7 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 
 
 /**
@@ -37,7 +37,7 @@ public class ToastUtil {
 
             mLastShowTime = System.currentTimeMillis();
 
-            Toast.makeText(SoftApplication.get(), text, duration).show();
+            Toast.makeText(FrameApplication.get(), text, duration).show();
         }
 
     }
@@ -49,7 +49,7 @@ public class ToastUtil {
      * @param duration
      */
     public static void show(int resId, int duration) {
-        CharSequence text = SoftApplication.get().getResources().getText(resId);
+        CharSequence text = FrameApplication.get().getResources().getText(resId);
         show(text, duration);
     }
 

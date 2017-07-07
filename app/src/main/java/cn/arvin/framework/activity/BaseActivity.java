@@ -1,5 +1,6 @@
 package cn.arvin.framework.activity;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,24 +12,20 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import cn.arvin.framework.application.AppManager;
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.utils.LogUtil;
 import cn.arvin.framework.utils.ToastUtil;
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+abstract class BaseActivity extends AppCompatActivity {
 
     private String TAG;
 
     protected Activity mActivity;
 
-    protected SoftApplication mApplication;
+    protected FrameApplication mApplication;
 
     protected AppManager mAppManager;
-
-    //Activity中是否包含Fragment,用于第三方统计分析，为true时只统计该Activity中的Fragment
-    protected boolean mContainsFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,30 +35,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         mActivity = this;
 
-        mApplication = SoftApplication.get();
+        mApplication = FrameApplication.get();
 
         mAppManager = AppManager.getInstance();
 
         mAppManager.addActivity(this);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!mContainsFragment) {
-            //MobclickAgent.onVisibleToUser(getTag());
-        }
-        //MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (!mContainsFragment) {
-            //MobclickAgent.onInVisibleToUser(getTag());
-        }
-        //MobclickAgent.onPause(this);
     }
 
     @Override
@@ -78,6 +57,30 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         mAppManager.removeActivity(this);
         super.onDestroy();
+    }
+
+
+    /**
+     * 根据控件id将控件实例化，利用泛型，省略了findViewById时强制类型转换
+     *
+     * @param id
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected final <T extends View> T getView(int id) {
+        return (T) findViewById(id);
+    }
+
+    /**
+     * 根据控件id将控件实例化，利用泛型，省略了findViewById时强制类型转换
+     *
+     * @param parent
+     * @param id
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected final <T extends View> T getView(View parent, int id) {
+        return (T) parent.findViewById(id);
     }
 
 
@@ -108,7 +111,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 隐藏键盘
@@ -144,9 +146,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return this.getClass().getSimpleName();
     }
 
-    protected void setContainsFragment(boolean containFragment) {
-        mContainsFragment = containFragment;
-    }
 
     /**
      * 显示toast通知
@@ -160,7 +159,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public final void showToast(int resId) {
         ToastUtil.show(resId);
     }
-
 
     /**
      * 打印日志
@@ -183,5 +181,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     public final void LogV(String msg) {
         LogUtil.v(getTag(), msg);
     }
-
 }

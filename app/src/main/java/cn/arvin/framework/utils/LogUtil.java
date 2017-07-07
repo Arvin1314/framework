@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Set;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.constants.Config;
 
 
@@ -29,7 +29,7 @@ public class LogUtil {
     // 是否需要打印bug，可以在application的onCreate函数里面初始化
     private static final boolean DEBUG = Config.DEBUG;
 
-    private static final String TAG = SoftApplication.get().getPackageName();
+    private static final String TAG = FrameApplication.get().getPackageName();
 
     // 下面四个是默认tag的函数
     public static void i(String msg) {
@@ -117,7 +117,7 @@ public class LogUtil {
         FileOutputStream fos = null;
         try {
             String date = DateTimeUtil.formatCurrentTime(DateTimeUtil.DF_YYYY_MM_DD);
-            String path = StorageUtil.getStoreLogDirectoryPath(SoftApplication.get()) + "/" + "log_" + date + ".txt";
+            String path = StorageUtil.getStoreLogDirectoryPath(FrameApplication.get()) + "/" + "log_" + date + ".txt";
             File file = new File(path);
             fos = new FileOutputStream(file, true);
 

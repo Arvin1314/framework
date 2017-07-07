@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.constants.Config;
 
 
@@ -256,13 +256,13 @@ public class FileUtil {
      * @return
      */
     public static String getCachePhotoPath(String fileName) {
-        File dir = SoftApplication.get().getExternalCacheDir();
+        File dir = FrameApplication.get().getExternalCacheDir();
         File file = new File(dir, fileName);
         return file.getPath();
     }
 
     public static Uri getCachePhotoUri(String fileName) {
-        File dir = SoftApplication.get().getExternalCacheDir();
+        File dir = FrameApplication.get().getExternalCacheDir();
         File file = new File(dir, fileName);
 
         Uri imgUri = Uri.fromFile(file);

@@ -1,5 +1,6 @@
 package cn.arvin.framework.application;
 
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentName;
@@ -8,19 +9,37 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
+import java.net.CookieHandler;
 import java.util.List;
 
+import cn.arvin.framework.constants.Config;
+import cn.arvin.framework.core.image.ImageLoader;
+import cn.arvin.framework.core.image.impl.ImageLoaderImpl;
+import cn.arvin.framework.exception.AppUncaughtExceptionHandler;
 import cn.arvin.framework.utils.CollectionsUtil;
 
 
-public abstract class AbsApp extends Application {
+public class FrameApplication extends Application {
 
-    private static AbsApp sApplication;
+    private static FrameApplication sApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
         sApplication = this;
+
+        //全局异常捕获
+        Thread.setDefaultUncaughtExceptionHandler(AppUncaughtExceptionHandler.INSTANCE);
+
+        //初始化Filter
+        FilterManager.init(this);
+
+        //Cookie管理
+        CookieHandler.setDefault(new AppCookieManager(this));
+
+        //设置图片加载器
+        ImageLoader.setImageHandle(new ImageLoaderImpl());
+
     }
 
     /**
@@ -29,7 +48,7 @@ public abstract class AbsApp extends Application {
      * @return Application
      */
     @SuppressWarnings("unchecked")
-    public static <T extends AbsApp> T get() {
+    public static <T extends FrameApplication> T get() {
         return (T) sApplication;
     }
 
@@ -94,6 +113,24 @@ public abstract class AbsApp extends Application {
             }
         }
         return false;
+    }
+
+    /**
+     * 设置应用是否可以调试，打印日志等
+     *
+     * @param debug
+     */
+    public static void setDebug(boolean debug) {
+        Config.DEBUG = debug;
+    }
+
+    /**
+     * 设置应用是否使用cookie
+     *
+     * @param useCookie
+     */
+    public static void setUseCookie(boolean useCookie) {
+        Config.USE_COOKIE = useCookie;
     }
 
 }

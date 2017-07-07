@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- title的高度 -->
+    <dimen name="title_height_size">48dp</dimen>
+
+    <!--默认字号-->
+    <dimen name="microTextSize">12sp</dimen>
+    <dimen name="smallTextSize">14sp</dimen>
+    <dimen name="middleTextSize">16sp</dimen>
+    <dimen name="largeTextSize">18sp</dimen>
+
+</resources>

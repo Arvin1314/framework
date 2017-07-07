@@ -3,7 +3,7 @@ package cn.arvin.framework.exception;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 import cn.arvin.framework.application.AppManager;
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.utils.LogUtil;
 
 
@@ -30,7 +30,7 @@ public enum AppUncaughtExceptionHandler implements UncaughtExceptionHandler {
 
         //SystemClock.sleep(2000);
         //退出应用
-        AppManager.getInstance().exitApplication(SoftApplication.get());
+        AppManager.getInstance().exitApplication(FrameApplication.get());
     }
 
 }

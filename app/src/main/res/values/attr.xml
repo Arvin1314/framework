@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CellView">
+        <attr name="icon" format="reference" />
+        <attr name="marginLeft" format="dimension" />
+        <attr name="next" format="reference" />
+        <attr name="marginRight" format="dimension" />
+
+        <attr name="contentMarginLeft" format="dimension" />
+        <attr name="contentMarginRight" format="dimension" />
+
+        <attr name="nameText" format="string" />
+        <attr name="nameTextColor" format="color|reference" />
+        <attr name="nameTextSize" format="dimension" />
+        <attr name="nameBackground" format="color|reference" />
+
+        <attr name="valueText" format="string" />
+        <attr name="valueTextColor" format="color|reference" />
+        <attr name="valueTextSize" format="dimension" />
+        <attr name="valueBackground" format="color|reference" />
+
+        <attr name="dividerHeight" format="dimension" />
+        <attr name="dividerTop" format="color|reference" />
+        <attr name="dividerTopHeight" format="dimension" />
+        <attr name="dividerBottom" format="color|reference" />
+        <attr name="dividerBottomHeight" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="HeaderBar">
+        <attr name="headerBackground" format="color|reference" />
+        <attr name="headerDivider" format="color|reference" />
+        <attr name="headerLeftText" format="string|reference" />
+        <attr name="headerLeftTextSize" format="dimension|reference" />
+        <attr name="headerLeftTextColor" format="color|reference" />
+        <attr name="headerLeftDrawable" format="reference" />
+        <attr name="headerLogo" format="reference" />
+        <attr name="headerCenterText" format="string|reference" />
+        <attr name="headerCenterTextSize" format="dimension|reference" />
+        <attr name="headerCenterTextColor" format="color|reference" />
+
+    </declare-styleable>
+
+</resources>

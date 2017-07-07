@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.constants.Config;
 
 public class PreUtil {
@@ -18,7 +18,7 @@ public class PreUtil {
      */
     public static final String FILE_NAME = Config.SP_NAME;
 
-    private static final SharedPreferences preferences = SoftApplication.get().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    private static final SharedPreferences preferences = FrameApplication.get().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
 
     private PreUtil() {
 

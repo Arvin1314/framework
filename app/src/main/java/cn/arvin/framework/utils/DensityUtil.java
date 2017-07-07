@@ -2,7 +2,7 @@ package cn.arvin.framework.utils;
 
 import android.content.Context;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.bean.Screen;
 
 
@@ -29,7 +29,7 @@ public class DensityUtil {
      * @return
      */
     public static float sp2px(float sp) {
-        Context context = SoftApplication.get();
+        Context context = FrameApplication.get();
         final float scale = context.getResources().getDisplayMetrics().scaledDensity;
         return sp * scale;
     }

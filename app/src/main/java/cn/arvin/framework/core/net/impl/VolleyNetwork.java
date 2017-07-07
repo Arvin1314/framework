@@ -28,7 +28,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 import cn.arvin.framework.R;
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 import cn.arvin.framework.core.net.RequestSender;
 import cn.arvin.framework.core.net.NetworkHeader;
 import cn.arvin.framework.core.net.RequestModel;
@@ -57,7 +57,7 @@ public class VolleyNetwork extends CommonNetwork {
 
     private VolleyNetwork() {
         // 这个用单例
-        mRequestQueue = Volley.newRequestQueue(SoftApplication.get());//,new HurlStack(null, HTTPSTrustManager.buildSSLSocketFactory())
+        mRequestQueue = Volley.newRequestQueue(FrameApplication.get());//,new HurlStack(null, HTTPSTrustManager.buildSSLSocketFactory())
     }
 
     public RequestQueue getRequestQueue() {

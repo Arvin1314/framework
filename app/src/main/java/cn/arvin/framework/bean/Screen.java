@@ -4,17 +4,17 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
-import cn.arvin.framework.application.SoftApplication;
+import cn.arvin.framework.application.FrameApplication;
 
 
 public class Screen {
-  public static final int WIDTH = getWidth(SoftApplication.get());
+  public static final int WIDTH = getWidth(FrameApplication.get());
 
-  public static final int HEIGHT = getHeight(SoftApplication.get());
+  public static final int HEIGHT = getHeight(FrameApplication.get());
 
-  public static final int STATUS_BAR_HEIGHT = getStatusBarHeight(SoftApplication.get());
+  public static final int STATUS_BAR_HEIGHT = getStatusBarHeight(FrameApplication.get());
 
-  public static final float SCALE = getScale(SoftApplication.get());
+  public static final float SCALE = getScale(FrameApplication.get());
 
   /**
    * 获取屏幕宽度

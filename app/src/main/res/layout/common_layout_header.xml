@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_height_size">
+
+    <TextView
+        android:id="@+id/header_leftview"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="9dp"
+        android:drawableLeft="@mipmap/common_arrows_left"
+        android:gravity="center"
+        android:lines="1"
+        android:maxWidth="100dp"
+        android:minHeight="32dp"
+        android:textColor="@color/text_color_666666"
+        android:textSize="@dimen/middleTextSize" />
+
+    <ImageView
+        android:id="@+id/header_center_logo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/header_center_title"
+        android:maxWidth="100dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/header_center_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:lines="1"
+        android:maxWidth="180dp"
+        android:textColor="@color/text_color_666666"
+        android:textSize="@dimen/largeTextSize" />
+
+    <TextView
+        android:id="@+id/header_rightview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:lines="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:maxWidth="100dp"
+        android:minHeight="32dp"
+        android:minWidth="60dp"
+        android:textColor="@color/text_color_666666"
+        android:textSize="@dimen/middleTextSize"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/header_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/title_divider" />
+</RelativeLayout>
