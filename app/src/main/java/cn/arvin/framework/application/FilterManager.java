@@ -19,7 +19,7 @@ public class FilterManager {
         return mFilters;
     }
 
-    public static void init(LinkedList<Filter> filters){
+    public static void init(LinkedList<Filter> filters) {
         mFilters = filters;
     }
 
@@ -27,6 +27,10 @@ public class FilterManager {
         try {
             String packageName = context.getPackageName();
             ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+
+            if (appInfo.metaData == null) {
+                return;
+            }
             String filterNameString = appInfo.metaData.getString("FILTERS");
 
             mFilters.clear();
