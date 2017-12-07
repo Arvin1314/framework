@@ -15,7 +15,7 @@ public class ToastUtil {
 
     private static long mLastShowTime;
 
-    private static CharSequence mLastShowContent;
+    private static CharSequence mLastShowContent = "";
 
     private ToastUtil() {
     }
